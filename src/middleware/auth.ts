@@ -1,6 +1,6 @@
 
 import { NextFunction,Request,Response } from 'express';
-import {auth} from 'express-oauth2-jwt-bearer'
+import { auth } from 'express-oauth2-jwt-bearer';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
