@@ -13,10 +13,10 @@ declare global {
 }
 
 export const jwtCheck = auth({
-    audience: process.env.AUTH0_AUDIENCE,
-    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-    tokenSigningAlg: 'RS256'
-  });
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+  tokenSigningAlg: "RS256",
+});
 
   export const jwtParse = async (
     req: Request,
@@ -32,17 +32,16 @@ export const jwtCheck = auth({
 
   //get token from authorization
   // Bearer fdgkdfkdfjdfjdkfjdkk545ufdjf8u54r
-  const token =authorization.split(" ")[1];
+  const token = authorization.split(" ")[1];
 
   try {
-    const decoded =jwt.decode(token) as jwt.JwtPayload;
-    const auth0Id =decoded.sub;
+    const decoded = jwt.decode(token) as jwt.JwtPayload;
+    const auth0Id = decoded.sub;
 
-    const user = await User.findOne({auth0Id})
+    const user = await User.findOne({ auth0Id });
 
-    if(!user){
+    if (!user) {
       return res.sendStatus(401);
-
     }
 
     // req object chai MyUserController ko UpdateCurrentUser bata aauxa
