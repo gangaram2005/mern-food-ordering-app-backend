@@ -1,6 +1,5 @@
-
+import { auth } from "express-oauth2-jwt-bearer";
 import { NextFunction,Request,Response } from 'express';
-import { auth } from 'express-oauth2-jwt-bearer';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
@@ -19,12 +18,17 @@ export const jwtCheck = auth({
     tokenSigningAlg: 'RS256'
   });
 
-export const jwtParse =async(req:Request,res:Response,next:NextFunction)=>{
-  const {authorization}=req.headers;
-
-  if(!authorization || !authorization.startsWith("Bearer ")){
-    return res.sendStatus(401);
-  }
+  export const jwtParse = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { authorization } = req.headers;
+  
+    if (!authorization || !authorization.startsWith("Bearer ")) {
+      return res.sendStatus(401);
+    }
+  
 
   //get token from authorization
   // Bearer fdgkdfkdfjdfjdkfjdkk545ufdjf8u54r
